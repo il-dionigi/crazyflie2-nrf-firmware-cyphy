@@ -6,9 +6,9 @@
  *           nRF51 from Nordic Semiconductor.
  *
  * @version  V522
- * @date     26. August 2014
+ * @date     4. March 2014
  *
- * @note     Generated with SVDConv V2.81d 
+ * @note     Generated with SVDConv V2.77p 
  *           from CMSIS SVD File 'nRF51.xml' Version 522,
  *
  * @par      Copyright (c) 2013, Nordic Semiconductor ASA
@@ -109,14 +109,14 @@ typedef enum {
 /* ================      Processor and Core Peripheral Section     ================ */
 /* ================================================================================ */
 
-/* ----------------Configuration of the Cortex-M0 Processor and Core Peripherals---------------- */
+/* ----------------Configuration of the cm0 Processor and Core Peripherals---------------- */
 #define __CM0_REV                 0x0301            /*!< Cortex-M0 Core Revision                                               */
 #define __MPU_PRESENT                  0            /*!< MPU present or not                                                    */
 #define __NVIC_PRIO_BITS               2            /*!< Number of Bits used for Priority Levels                               */
 #define __Vendor_SysTickConfig         0            /*!< Set to 1 if different SysTick Config is used                          */
 /** @} */ /* End of group Configuration_of_CMSIS */
 
-#include "core_cm0.h"                               /*!< Cortex-M0 processor and core peripherals                              */
+#include <core_cm0.h>                               /*!< Cortex-M0 processor and core peripherals                              */
 #include "system_nrf51.h"                           /*!< nRF51 System                                                          */
 
 
@@ -271,6 +271,8 @@ typedef struct {                                    /*!< MPU Structure          
   __IO uint32_t  PROTENSET1;                        /*!< Erase and write protection bit enable set register.                   */
   __IO uint32_t  DISABLEINDEBUG;                    /*!< Disable erase and write protection mechanism in debug mode.           */
   __IO uint32_t  PROTBLOCKSIZE;                     /*!< Erase and write protection block size.                                */
+  __I  uint32_t  RESERVED2[255];
+  __IO uint32_t  ENRBDREG;                          /*!< Enable or disable RBD.                                                */
 } NRF_MPU_Type;
 
 
@@ -432,7 +434,7 @@ typedef struct {                                    /*!< UART Structure         
   __IO uint32_t  PSELCTS;                           /*!< Pin select for CTS.                                                   */
   __IO uint32_t  PSELRXD;                           /*!< Pin select for RXD.                                                   */
   __I  uint32_t  RXD;                               /*!< RXD register. On read action the buffer pointer is displaced.
-                                                         Once read the character is consumed. If read when no character
+                                                         Once read the character is consummed. If read when no character
                                                           available, the UART will stop working.                               */
   __O  uint32_t  TXD;                               /*!< TXD register.                                                         */
   __I  uint32_t  RESERVED10;
@@ -1050,7 +1052,8 @@ typedef struct {                                    /*!< FICR Structure         
   __I  uint32_t  RESERVED0[4];
   __I  uint32_t  CODEPAGESIZE;                      /*!< Code memory page size in bytes.                                       */
   __I  uint32_t  CODESIZE;                          /*!< Code memory size in pages.                                            */
-  __I  uint32_t  RESERVED1[4];
+  __I  uint32_t  RBD;                               /*!< RBD.                                                                  */
+  __I  uint32_t  RESERVED1[3];
   __I  uint32_t  CLENR0;                            /*!< Length of code region 0 in bytes.                                     */
   __I  uint32_t  PPFC;                              /*!< Pre-programmed factory code present.                                  */
   __I  uint32_t  RESERVED2;
@@ -1061,7 +1064,7 @@ typedef struct {                                    /*!< FICR Structure         
                                                          kept for backward compatinility purposes. Use SIZERAMBLOCKS
                                                           instead.                                                             */
     __I  uint32_t  SIZERAMBLOCKS;                   /*!< Size of RAM blocks in bytes.                                          */
-  };
+  } ;
   __I  uint32_t  RESERVED3[5];
   __I  uint32_t  CONFIGID;                          /*!< Configuration identifier.                                             */
   __I  uint32_t  DEVICEID[2];                       /*!< Device identifier.                                                    */
@@ -1189,6 +1192,7 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_AMLI                        ((NRF_AMLI_Type           *) NRF_AMLI_BASE)
 #define NRF_RADIO                       ((NRF_RADIO_Type          *) NRF_RADIO_BASE)
 #define NRF_UART0                       ((NRF_UART_Type           *) NRF_UART0_BASE)
+#define NRF_UART1                       ((NRF_UART_Type           *) NRF_UART0_BASE)
 #define NRF_SPI0                        ((NRF_SPI_Type            *) NRF_SPI0_BASE)
 #define NRF_TWI0                        ((NRF_TWI_Type            *) NRF_TWI0_BASE)
 #define NRF_SPI1                        ((NRF_SPI_Type            *) NRF_SPI1_BASE)
@@ -1215,6 +1219,7 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_FICR                        ((NRF_FICR_Type           *) NRF_FICR_BASE)
 #define NRF_UICR                        ((NRF_UICR_Type           *) NRF_UICR_BASE)
 #define NRF_GPIO                        ((NRF_GPIO_Type           *) NRF_GPIO_BASE)
+#define NRF_GPIO1                       ((NRF_GPIO_Type           *) NRF_GPIO_BASE)
 
 
 /** @} */ /* End of group Device_Peripheral_Registers */

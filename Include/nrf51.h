@@ -1192,6 +1192,7 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_AMLI                        ((NRF_AMLI_Type           *) NRF_AMLI_BASE)
 #define NRF_RADIO                       ((NRF_RADIO_Type          *) NRF_RADIO_BASE)
 #define NRF_UART0                       ((NRF_UART_Type           *) NRF_UART0_BASE)
+#define NRF_UART1                       ((NRF_UART_Type           *) NRF_UART0_BASE)
 #define NRF_SPI0                        ((NRF_SPI_Type            *) NRF_SPI0_BASE)
 #define NRF_TWI0                        ((NRF_TWI_Type            *) NRF_TWI0_BASE)
 #define NRF_SPI1                        ((NRF_SPI_Type            *) NRF_SPI1_BASE)
@@ -1218,6 +1219,7 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_FICR                        ((NRF_FICR_Type           *) NRF_FICR_BASE)
 #define NRF_UICR                        ((NRF_UICR_Type           *) NRF_UICR_BASE)
 #define NRF_GPIO                        ((NRF_GPIO_Type           *) NRF_GPIO_BASE)
+#define NRF_GPIO1                       ((NRF_GPIO_Type           *) NRF_GPIO_BASE)
 
 
 /** @} */ /* End of group Device_Peripheral_Registers */
