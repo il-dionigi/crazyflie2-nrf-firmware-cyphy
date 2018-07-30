@@ -29,12 +29,8 @@
 #define UART_TX_PIN 29
 #define UART_RTS_PIN 14
 #else
-# Consider changing below to RX0 and TX0 once known where referenced
 #define UART_RX_PIN 12
 #define UART_TX_PIN 11
-# Dual-uart change
-#define UART_RX_PIN1 30
-#define UART_TX_PIN1 29
 #endif
 
 /* Rev. B prototype is patched to switch PM_CHG and PM_ISET

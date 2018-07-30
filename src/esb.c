@@ -253,8 +253,6 @@ void esbInterruptHandler()
         NRF_RADIO->PACKETPTR = (uint32_t)&rxPackets[rxq_head];
         NRF_RADIO->TASKS_START = 1UL;
       }
-
-
       break;
     case doTx:
       //Setup RX for next packet
@@ -309,11 +307,12 @@ void esbInit()
 
   NRF_RADIO->FREQUENCY = channel;
 
-  if (contwave) {
-    NRF_RADIO->TEST = 3;
-    NRF_RADIO->TASKS_RXEN = 1U;
-    return;
-  }
+  // TODO: Figure out what this should be for TXEN
+  // if (contwave) {
+  //   NRF_RADIO->TEST = 3;
+  //   NRF_RADIO->TASKS_RXEN = 1U;
+  //   return;
+  // }
 
   // Radio address config
   // We use local addresses 0 and 1
@@ -354,10 +353,12 @@ void esbInit()
   NRF_RADIO->SHORTS |= RADIO_SHORTS_DISABLED_TXEN_Msk;
   NRF_RADIO->SHORTS |= RADIO_SHORTS_DISABLED_RSSISTOP_Enabled;
 
-  // Set RX buffer and start RX
-  rs = doRx;
-	NRF_RADIO->PACKETPTR = (uint32_t)&rxPackets[rxq_head];
-  NRF_RADIO->TASKS_RXEN = 1U;
+  // CYPHY START
+  // Set TX buffer and start TX
+  rs = doTx;
+	NRF_RADIO->PACKETPTR = (uint32_t)&txPackets[txq_head];
+  NRF_RADIO->TASKS_TXEN = 1U;
+  // CYPHY END
 
   isInit = true;
 }
@@ -494,3 +495,15 @@ void esbSetAddress(uint64_t addr)
 
   esbReset();
 }
+
+// void esbSetTX(uint8_t txpower, uint8_t mode, uint8_t channel)
+// {
+//     radio_disable();
+//     NRF_RADIO->SHORTS     = RADIO_SHORTS_READY_START_Msk << RADIO_SHORTS_READY_START_Pos;
+//     NRF_RADIO->TXPOWER    = ((uint32_t)txpower << RADIO_TXPOWER_TXPOWER_Pos);
+//     NRF_RADIO->MODE       = ((uint32_t)mode << RADIO_MODE_MODE_Pos);
+//     NRF_RADIO->FREQUENCY  = channel;
+//     NRF_RADIO->TEST       = (RADIO_TEST_CONST_CARRIER_Enabled << RADIO_TEST_CONST_CARRIER_Pos)
+//                             | (RADIO_TEST_PLL_LOCK_Enabled << RADIO_TEST_PLL_LOCK_Pos);
+//     NRF_RADIO->TASKS_TXEN = 1;
+// }

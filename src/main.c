@@ -294,6 +294,20 @@ void mainloop()
             syslinkSend(&slRxPacket);
           }
           break;
+        case SYSLINK_D2D_WRITE:
+          if (esbCanTxPacket() && (slRxPacket.length < SYSLINK_MTU))
+          {
+            EsbPacket* packet = esbGetTxPacket();
+
+            if (packet) {
+              memcpy(packet->data, slRxPacket.data, slRxPacket.length);
+              packet->size = slRxPacket.length;
+
+              esbSendTxPacket(packet);
+            }
+            bzero(slRxPacket.data, SYSLINK_MTU);
+          }
+          break;
       }
     }
 
